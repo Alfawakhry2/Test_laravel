@@ -29,9 +29,21 @@ class PrintEmail extends Command
         // return $this->info('Your email is : ' . $this->argument('email')) ;
         // return $this->error('Unknown Error');
 
-        $this->table(
-            ['#' , 'Full Name' , 'Email'],
-            User::all(['id' , 'name' , 'email'])->toArray(),
-        );
+        // $this->table(
+        //     ['#' , 'Full Name' , 'Email'],
+        //     User::all(['id' , 'name' , 'email'])->toArray(),
+        // );
+
+        //create progress bar
+        $users = User::all();
+        $bar = $this->output->createProgressBar(count($users));
+        $bar->start();
+        foreach($users as $user){
+            $this->info($user->name);
+            $this->newLine();
+            $bar->advance();
+        }
+        $bar->finish();
+
     }
 }
