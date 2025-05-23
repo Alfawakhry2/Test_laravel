@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\UserRegister;
+use App\Listeners\SendWelcomeEmail;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,5 +25,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
+
+        Event::listen(
+            UserRegister::class ,
+            SendWelcomeEmail::class ,
+        );
     }
 }

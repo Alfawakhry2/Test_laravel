@@ -39,7 +39,7 @@ class MakeViewCommand extends Command
 
         //check blade file found or not
         if(File::exists($fullPath)){
-            $this->error("This file {$fullPath} already exists !");
+             $this->error("This file {$fullPath} already exists !");
         }else{
             File::put($fullPath ,'');
             return $this->info('The File ' . $fullPath . ' Created Successfully');

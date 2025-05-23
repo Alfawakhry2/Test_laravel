@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegister;
 use App\Models\User;
 use App\Mail\WelcomeMail;
 use Illuminate\Http\Request;
@@ -30,8 +31,10 @@ class AuthController extends Controller
 
         //insert
         $user = User::create($data);
+
+        event(new UserRegister($user));
+
         Auth::login($user);
-        Mail::to($user->email)->send(new WelcomeMail($user->name));
         //redirect
         // session()->flash("success", "Account created , Login to check !");
         return redirect(url("categories"));

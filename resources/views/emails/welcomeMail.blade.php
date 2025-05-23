@@ -7,7 +7,7 @@
     <title>Welcome Mail</title>
 </head>
 <body>
-    <h1>welcome {{$name}}</h1>
+    <h1>welcome {{$user->name}}</h1>
 <h1>Welcome to our website we are happy to register</h1>
 </body>
 </html>
