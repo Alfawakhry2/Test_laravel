@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserLogout;
 use App\Events\UserRegister;
+use App\Listeners\SendWelcomeEmail;
+use App\Mail\logoutEmail;
 use App\Models\User;
 use App\Mail\WelcomeMail;
 use Illuminate\Http\Request;
@@ -71,7 +74,9 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $user = Auth::user();
         Auth::logout();
+        UserLogout::dispatch($user);
         return redirect(url("login"));
     }
 

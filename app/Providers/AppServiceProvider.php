@@ -26,9 +26,11 @@ class AppServiceProvider extends ServiceProvider
         //
         Paginator::useBootstrap();
 
-        Event::listen(
-            UserRegister::class ,
-            SendWelcomeEmail::class ,
-        );
+        // Event::listen(
+        //     UserRegister::class ,
+        //     SendWelcomeEmail::class ,
+        // );
+        Event::subscribe(SendWelcomeEmail::class);
+
     }
 }
