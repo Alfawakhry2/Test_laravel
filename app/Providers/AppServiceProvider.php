@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\UserRegister;
+use Illuminate\Support\Collection;
 use App\Listeners\SendWelcomeEmail;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Event;
@@ -23,6 +24,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //collection methods
+        Collection::macro('toUpper', function () {
+            return $this->map(function ($item) {
+                return strtoupper($item);
+            });
+        });
+
         //
         Paginator::useBootstrap();
 
@@ -31,6 +39,5 @@ class AppServiceProvider extends ServiceProvider
         //     SendWelcomeEmail::class ,
         // );
         Event::subscribe(SendWelcomeEmail::class);
-
     }
 }

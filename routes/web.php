@@ -122,3 +122,5 @@ Route::controller(AuthController::class)->group(function () {
     });
     route::get('allusers', 'allusers')->middleware(['is_admin', "auth"]);
 });
+
+route::get('test' , [TestController::class , 'test']);
